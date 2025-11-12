@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bill of Rights Keyword Finder | RightsDesk</title>
+  <meta name="description" content="Type a keyword to instantly find and highlight where it appears in the Bill of Rights. Free, fast, and mobile-friendly.">
+  <link rel="canonical" href="https://rightsdisk.org/apps/bill-of-rights-keyword-finder/">
+  <meta property="og:title" content="Bill of Rights Keyword Finder">
+  <meta property="og:description" content="Type a keyword to instantly find and highlight where it appears in Amendments I–X.">
+  <meta property="og:url" content="https://rightsdisk.org/apps/bill-of-rights-keyword-finder/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebApplication",
+    "name": "Bill of Rights Keyword Finder",
+    "operatingSystem": "All",
+    "applicationCategory": "LegalService",
+    "url": "https://rightsdisk.org/apps/bill-of-rights-keyword-finder/"
+  }
+  </script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google AdSense Auto Ads -->
+  <script data-ad-client="ca-pub-2563755350413044" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <style>
+    .highlight { background-color: #FEF3C7; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<header class="bg-white shadow">
+  <div class="max-w-6xl mx-auto p-4 flex justify-between items-center">
+    <a href="/" class="text-2xl font-bold text-blue-600">RightsDesk</a>
+    <nav>
+      <a href="/" class="text-sm text-blue-600 underline">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-4">Bill of Rights Keyword Finder</h1>
+  <p class="mb-4">Enter a keyword (e.g., “press”, “search”) and we’ll highlight matches across Amendments&nbsp;I–X.</p>
+
+  <div class="flex flex-col sm:flex-row sm:space-x-2">
+    <label for="keyword" class="sr-only">Keyword</label>
+    <input id="keyword" type="text" class="flex-1 border rounded p-2" placeholder="Enter keyword">
+    <button id="searchBtn" class="mt-2 sm:mt-0 px-4 py-2 bg-blue-600 text-white rounded">Search</button>
+    <button id="resetBtn" class="mt-2 sm:mt-0 px-4 py-2 bg-gray-200 text-gray-800 rounded">Reset</button>
+  </div>
+
+  <div class="flex space-x-2 mt-3">
+    <button id="copyBtn" class="px-4 py-2 bg-green-600 text-white rounded">Copy results</button>
+    <button id="shareBtn" class="px-4 py-2 bg-indigo-600 text-white rounded">Share link</button>
+  </div>
+
+  <div id="resultsSummary" class="mt-4 text-sm text-gray-700" aria-live="polite"></div>
+  <div id="amendments" class="mt-6 space-y-6"></div>
+
+  <!-- Affiliate panel -->
+  <section aria-label="Recommended resources" class="mt-8 space-y-2">
+    <h2 class="text-lg font-semibold">Recommended civics resources</h2>
+    <ul class="list-disc list-inside text-sm">
+      <li><a href="https://www.amazon.com/s?k=pocket+constitution" class="underline" target="_blank">Pocket Constitution</a></li>
+      <li><a href="https://www.amazon.com/s?k=civics+study+guide" class="underline" target="_blank">Civics Study Guide</a></li>
+      <li><a href="https://www.amazon.com/s?k=constitutional+law+outline" class="underline" target="_blank">Con Law Outline</a></li>
+    </ul>
+  </section>
+
+
+  <p class="text-xs text-gray-500 mt-6">This tool runs entirely in your browser and does not send your data anywhere.</p>
+</main>
+
+<footer class="bg-white shadow mt-12">
+  <div class="max-w-6xl mx-auto p-4 text-sm flex justify-between items-center">
+    <div>© 2025 RightsDesk · <a href="/privacy.html" class="underline">Privacy</a> · <a href="mailto:bearjakins@gmail.com" class="underline">Contact</a> · <a href="https://www.tiktok.com/@barronjkns" class="underline" target="_blank">TikTok @barronjkns</a></div>
+  </div>
+</footer>
+
+<script>
+// Amendments text (Bill of Rights) from the National Archives【470169887546908†L183-L249】.
+const amendments = [
+  { number: 'I', text: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.' },
+  { number: 'II', text: 'A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.' },
+  { number: 'III', text: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.' },
+  { number: 'IV', text: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, and particularly describing the place to be searched, and the persons or things to be seized.' },
+  { number: 'V', text: 'No person shall be held to answer for a capital, or otherwise infamous crime, unless on a presentment or indictment of a Grand Jury, except in cases arising in the land or naval forces, or in the Militia, when in actual service in time of War or public danger; nor shall any person be subject for the same offence to be twice put in jeopardy of life or limb; nor shall be compelled in any criminal case to be a witness against himself, nor be deprived of life, liberty, or property, without due process of law; nor shall private property be taken for public use, without just compensation.' },
+  { number: 'VI', text: 'In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury of the State and district wherein the crime shall have been committed, which district shall have been previously ascertained by law, and to be informed of the nature and cause of the accusation; to be confronted with the witnesses against him; to have compulsory process for obtaining witnesses in his favor, and to have the Assistance of Counsel for his defence.' },
+  { number: 'VII', text: 'In Suits at common law, where the value in controversy shall exceed twenty dollars, the right of trial by jury shall be preserved, and no fact tried by a jury, shall be otherwise re-examined in any Court of the United States, than according to the rules of the common law.' },
+  { number: 'VIII', text: 'Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted.' },
+  { number: 'IX', text: 'The enumeration in the Constitution, of certain rights, shall not be construed to deny or disparage others retained by the people.' },
+  { number: 'X', text: 'The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people.' }
+];
+
+const amendmentsContainer = document.getElementById('amendments');
+const resultsDiv = document.getElementById('resultsSummary');
+const keywordInput = document.getElementById('keyword');
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function render(text, keyword) {
+  if (!keyword) return text;
+  const re = new RegExp(escapeRegex(keyword), 'gi');
+  return text.replace(re, match => '<span class="highlight">' + match + '</span>');
+}
+
+function update() {
+  const keyword = keywordInput.value.trim();
+  const counts = {};
+  amendmentsContainer.innerHTML = '';
+  amendments.forEach(amend => {
+    const count = keyword ? (amend.text.match(new RegExp(escapeRegex(keyword), 'gi')) || []).length : 0;
+    counts[amend.number] = count;
+    const highlighted = render(amend.text, keyword);
+    const section = document.createElement('section');
+    section.className = 'border p-4 rounded';
+    section.innerHTML = '<h3 class="font-semibold mb-2">Amendment ' + amend.number + '</h3><p>' + highlighted + '</p>';
+    amendmentsContainer.appendChild(section);
+  });
+  if (keyword) {
+    let total = 0;
+    const lines = [];
+    for (const num of Object.keys(counts)) {
+      const c = counts[num];
+      total += c;
+      if (c > 0) lines.push('Amendment ' + num + ': ' + c);
+    }
+    resultsDiv.textContent = total > 0
+      ? ('Found ' + total + ' match' + (total > 1 ? 'es' : '') + ' across ' + lines.length + ' amendment' + (lines.length > 1 ? 's' : '') + ' (' + lines.join(', ') + ')')
+      : 'No matches found.';
+  } else {
+    resultsDiv.textContent = 'Enter a keyword to search the amendments.';
+  }
+}
+
+function updateQuery() {
+  const keyword = keywordInput.value.trim();
+  const params = new URLSearchParams(window.location.search);
+  if (keyword) params.set('q', keyword);
+  else params.delete('q');
+  const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+  history.replaceState({}, '', newUrl);
+}
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+  update();
+  updateQuery();
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  keywordInput.value = '';
+  update();
+  updateQuery();
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const text = resultsDiv.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Results copied to clipboard!');
+  });
+});
+
+document.getElementById('shareBtn').addEventListener('click', () => {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    alert('Shareable link copied to clipboard!');
+  });
+});
+
+function init() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (q) {
+    keywordInput.value = q;
+  }
+  update();
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
